@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="colorlib.com">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='main.css') }}">
+  </head>
+  <body class="b">
+    <div>
+      <form  action = "{{ url_for('upload_file') }}" method = "POST" enctype="multipart/form-data">
+          <h1 style="color:black;"> Run Docker Commands Through browser</h1>
+            <select name="dropdown_cmds" id="FlaskCMDS">
+                <option value="echo hi">Add command here and in attribute value</option>
+                <option value="echo hi">echo hi</option>
+                <option value="path">path</option>
+                <option value="dir">Dir</option>
+            </select>
+            <button class="btn-search" type="submit" >Run</button>
+      </form>
+    </div>
+
+    <div style="background:#fff;">
+        {% if results %}
+        <p> Output : </p>
+        <br>
+            {%for i in results %}
+             <li>{{ i }}</li>
+                {%endfor%}
+        {% endif %}
+    </div>
+
+  </body>
+</html>
