@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="colorlib.com">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='main.css') }}">
+  </head>
+  <body >
+    <div class="h">Run Kubernetes using browser</div>
+    <div class="box">
+
+      <form  action = "{{ url_for('upload_file') }}" method = "POST" enctype="multipart/form-data">
+          <div class="row px-3 py-1">
+				<div class="col-md-10 ">
+                      <select  name="dropdown_cmds" id="FlaskCMDS">
+                            <option value="">Select command to run</option>
+                            <option value="kubectl get nodes">kubectl get nodes</option>
+                            <option value="kubectl get pods">kubectl get pods</option>
+                            <option value="kubectl get services">kubectl get services</option>
+                            <option value="kubectl create deployment my-nginx --image nginx">kubectl create deployment my-nginx --image nginx</option>
+                            <option value="kubectl get deployment">kubectl get deployment</option>
+                            <option value="kubectl scale deployment my-nginx --replicas 4">kubectl scale deployment my-nginx --replicas 4</option>
+                            <option value="kubectl describe deployment my-nginx">kubectl describe deployment my-nginx</option>
+                            <option value="kubectl delete deployments/my-nginx">kubectl delete deployments/my-nginx</option>
+                            <option value="">Dir</option>
+                        </select>
+
+                </div>
+                <div class="col-md-2">
+					<button class="btn btn-primary btn-lg btn-block" type="submit" >Run</button>
+				</div>
+          </div>
+
+      </form>
+    </div>
+
+
+        {% if results %}
+    <div class="o">
+        <h3> Output : </h3>
+        <br>
+            {%for i in results %}
+             <pre>{{ i }}</pre>
+
+                {%endfor%}
+
+    </div>
+        {% endif %}
+  </body>
+</html>
